@@ -20,7 +20,7 @@ Default users are created with the following credentials when the project is sta
   password: "manager",
 ```
 
-You need MANAGER role to create,delete or update a movie. You can use the following token to get MANAGER role.
+You need MANAGER role to create,delete or update a movie. You can use the following credentials to get MANAGER role.
 ```bash
   username: "manager",
   password: "manager",
