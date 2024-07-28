@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "root"
+    ports:
+      - '5432:5432'
+  nestjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestjs-app
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - PG_PORT=5432
+      - PG_HOST=db
+      - PG_USER=root
+      - PG_PASSWORD=root
+      - PG_DATABASE=root
+      - SECRET=secret
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
