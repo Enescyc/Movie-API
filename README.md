@@ -11,3 +11,11 @@
   database: process.env.PG_DATABASE || "root",
   $ docker-compose up --build
 ```
+Default users are created with the following credentials when the project is started.
+```bash
+  username: "customer",
+  password: "customer",
+  
+  username: "manager",
+  password: "manager",
+```
