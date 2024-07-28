@@ -37,13 +37,10 @@ export class UserService implements IUserService {
   }
 
   public async create(createUserDto: CreateUserDto): Promise<User> {
-    const userIsExist = await this.userRepository.existsBy({
-      username: createUserDto.username
-    });
+    const userIsExist = await this.userRepository.findOneBy({ username: createUserDto.username });
     if (userIsExist) {
       throw new UserAlreadyExistException(createUserDto.username);
     }
-
     const user = new User();
     user.username = createUserDto.username;
     user.password = createUserDto.password; // TODO HASH
@@ -55,6 +52,10 @@ export class UserService implements IUserService {
   }
 
   public async createAdmin(createUserDto: CreateUserDto): Promise<User> {
+    const userIsExist = await this.userRepository.findOneBy({ username: createUserDto.username });
+    if (userIsExist) {
+      throw new UserAlreadyExistException(createUserDto.username);
+    }
     const user = new User();
     user.username = createUserDto.username;
     user.password = createUserDto.password; // TODO HASH

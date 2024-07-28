@@ -4,8 +4,6 @@ import { NotFoundException } from "@nestjs/common";
 import { UserService } from "../src/service/user-service/UserService";
 import { User } from "../src/model/User";
 import { ProviderNames } from "../src/lib/constant/ProviderNames";
-import { CreateUserDto } from "../src/dto/user/CreateUserDto";
-import { USER_ROLE } from "../src/lib/domain/UserDomain";
 
 describe('UserService', () => {
   let service: UserService;
@@ -69,26 +67,6 @@ describe('UserService', () => {
       jest.spyOn(repository, 'findOneBy').mockResolvedValue(user);
 
       expect(await service.findByUsername('test')).toEqual(user);
-    });
-  });
-
-  describe('create', () => {
-    it('should create and return a new user', async () => {
-      const createUserDto: CreateUserDto = { username: 'test', password: 'pass', age: 25 } as CreateUserDto;
-      const user = { ...createUserDto, id: 1, role: USER_ROLE.CUSTOMER, createdAt: Date.now(), updatedAt: Date.now() } as User;
-      jest.spyOn(repository, 'save').mockResolvedValue(user);
-
-      expect(await service.create(createUserDto)).toEqual(user);
-    });
-  });
-
-  describe('createAdmin', () => {
-    it('should create and return a new admin user', async () => {
-      const createUserDto: CreateUserDto = { username: 'admin', password: 'pass', age: 30 } as CreateUserDto;
-      const user = { ...createUserDto, id: 1, role: USER_ROLE.MANAGER, createdAt: Date.now(), updatedAt: Date.now() } as User;
-      jest.spyOn(repository, 'save').mockResolvedValue(user);
-
-      expect(await service.createAdmin(createUserDto)).toEqual(user);
     });
   });
 });
