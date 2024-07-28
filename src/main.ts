@@ -51,10 +51,8 @@ async function integrateApp(app: INestApplication) {
       }
     ];
     const userService: IUserService = await app.resolve(ProviderNames.USER_SERVICE);
-    for (const user of defaultUsers) {
-      await userService.create(user);
-      console.info(`User ${user.username} created`);
-    }
+    await userService.createAdmin(defaultUsers[0]);
+    await userService.create(defaultUsers[1]);
 
     const movies: CreateMovieDto[] = [
       {
@@ -144,7 +142,7 @@ async function integrateApp(app: INestApplication) {
       console.info(`Ticket created for session ${ticket.sessionId}`);
     }
   } catch (e) {
-    console.error("Error while integrating app ");
+    console.error("Error while integrating app ",e);
   }
 }
 
