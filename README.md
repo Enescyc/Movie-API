@@ -9,5 +9,5 @@
   username: process.env.PG_USERNAME || "root",
   password: process.env.PG_PASSWORD || "root",
   database: process.env.PG_DATABASE || "root",
-  $ docker-compose up -- build
+  $ docker-compose up --build
 ```
