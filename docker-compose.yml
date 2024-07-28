@@ -1,15 +1,6 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres
-    container_name: postgres-db
-    environment:
-      POSTGRES_USER: "root"
-      POSTGRES_PASSWORD: "root"
-      POSTGRES_DB: "root"
-    ports:
-      - '5432:5432'
   nestjs-app:
     build:
       context: .
@@ -27,6 +18,15 @@ services:
       - SECRET=secret
     depends_on:
       - db
+  db:
+    image: postgres
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "root"
+    ports:
+      - '5432:5432'
 
 volumes:
   pgdata:
