@@ -9,7 +9,6 @@ export class AuthMiddleware implements NestMiddleware {
 
   async use(req: Request, res: Response, next: Function) {
     const { authorization } = req.headers as any;
-    console.log(authorization,"middleware");
     if (!authorization) {
       throw new UnauthorizedException("Unauthorized");
     }

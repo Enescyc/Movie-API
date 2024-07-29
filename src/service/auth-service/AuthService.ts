@@ -20,17 +20,15 @@ export class AuthService implements IAuthService {
   }
 
   public async login(userLoginDto: UserLoginDto): Promise<{ access_token: string }> {
-    console.log("user test");
     const user = await this.userService.findByUsername(userLoginDto.username);
     if (user.password != userLoginDto.password) {
       throw new UnauthorizedException();
     }
-    console.log(user);
 
     const payload = { sub: user, username: user.username };
     const token = await this.jwtService.signAsync(payload, { secret: process.env.SECRET });
     const tokenIsVerified = await this.verifyToken(token);
-    console.log(tokenIsVerified);
+
     if (!tokenIsVerified) throw new UnauthorizedException();
     return {
       access_token: await this.jwtService.signAsync(payload, { secret: process.env.SECRET })
