@@ -11,7 +11,7 @@ export class Ticket extends BaseEntity {
   @Column()
   userId: number;
 
-  @ManyToOne(() => Session, (session) => session.tickets, { eager: true })
+  @ManyToOne(() => Session, (session) => session.tickets, { eager: true, onDelete: "CASCADE" })
   @JoinColumn({ name: "sessionId" })
   session: Session;
   @Column()

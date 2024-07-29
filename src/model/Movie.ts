@@ -11,7 +11,7 @@ export class Movie extends BaseEntity {
   @Column()
   ageRestriction: number;
 
-  @OneToMany(() => Session, (session) => session.movie, { eager: false })
+  @OneToMany(() => Session, (session) => session.movie, { eager: false ,onDelete:"CASCADE"})
   sessions: Session[];
 
   @OneToMany(() => WatchedUserMovies, (watchedUserMovies) => watchedUserMovies.movie)

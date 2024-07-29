@@ -14,7 +14,7 @@ export class Session extends BaseEntity {
   @Column()
   roomNumber: number;
 
-  @ManyToOne(() => Movie, (movie) => movie.sessions, {})
+  @ManyToOne(() => Movie, (movie) => movie.sessions, {onDelete:"CASCADE"})
   @JoinColumn({ name: "movieId" })
   movie: Movie;
   @Column()
